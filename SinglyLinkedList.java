@@ -71,7 +71,10 @@ public class SinglyLinkedList<E> {
         Node<E> current = head;
 
         while (current != null){
-            result += " " + current.getElement();
+            result += current.getElement();
+            if (current.getNext() != null){
+                result += " ";
+            }
             current = current.getNext();
         }
         return result;
@@ -110,10 +113,10 @@ public class SinglyLinkedList<E> {
             previous = current;
             current = next;
         }
-
+        
         tail = head;
         head = previous;
+
     }
                  
-    }
 }
