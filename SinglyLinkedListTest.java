@@ -1,5 +1,3 @@
-import net.datastructures.SinglyLinkedList;
-
 public class SinglyLinkedListTest {
    public static void main(String[] args) {
        SinglyLinkedList<Integer> sll = new SinglyLinkedList<>();
@@ -63,15 +61,14 @@ public class SinglyLinkedListTest {
    }
 
    public static <E> void reverse(SinglyLinkedList<E> sll) {
-       SinglyLinkedList<E> temp = new SinglyLinkedList<>();
-       
-       while (!sll.isEmpty()) {
-           temp.addFirst(sll.removeFirst());
+      while (!sll.isEmpty()) {
+          temp.addFirst(sll.removeFirst());
+      }
+      
+      while (!temp.isEmpty()) {
+          sll.addLast(temp.removeFirst());
+      }
+
        }
-       
-       while (!temp.isEmpty()) {
-           sll.addLast(temp.removeFirst());
-       }
-   }
    }
 }
