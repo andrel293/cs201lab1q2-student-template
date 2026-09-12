@@ -72,11 +72,9 @@ public class SinglyLinkedList<E> {
 
         while (current != null){
             result += current.getElement();
-            if (current.getNext() != null){
-                result += " ";
-            }
             current = current.getNext();
         }
+
         return result;
     }
 
