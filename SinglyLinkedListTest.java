@@ -45,57 +45,67 @@ public class SinglyLinkedListTest {
     System.out.println();
    }
 
-    public String toString(SinglyLinkedList<Integer> sll){
-        String s = "";
-
-        Integer cur = sll.first();
-        
-        if (cur == null){
-            return null;
+  @Override
+    public String toString() {
+        if (head == null) {
+            return ""; 
         }
 
-        while (cur != null){
-            s = s + Integer.toString(cur.getElement());
+        String str = "[";
+        Node<E> cur = head;
+        while (cur != null) {
+            str += cur.getElement();
+            if (cur.getNext() != null) {
+                str += ", ";
+            }
             cur = cur.getNext();
         }
+        str += "]";
+        return str;
+    }
 
-        return s;
-
-   }
-
-    public static void removeLast(SinglyLinkedList<Integer> sll){
-
-        if (sll.isEmpty()){
-            return;
+    public E removeLast() {
+        if (head == null) {
+            return null; 
         }
 
-        if (head.getElement() == tail.getElement()){
+        E removedElement;
+
+        if (head == tail) {
+            removedElement = head.getElement();
             head = null;
             tail = null;
-            return;
+        } else {
+            Node<E> cur = head;
+            while (cur.getNext() != tail) {
+                cur = cur.getNext();
+            }
+            removedElement = tail.getElement();
+            cur.setNext(null); 
+            tail = cur;
         }
 
-        tail = null;
-        return;
+        size--;
+        return removedElement;
+    }
 
-   }
-
-    public void reverse(SinglyLinkedList<Integer> sll){ \
-
-        if (sll.isEmpty()){
-          return;  
+    public void reverse() {
+        if (head == null) {
+            return; 
         }
 
-        E prev = head;
-        E cur = head.getNext();
+        Node<E> prev = null;
+        Node<E> cur = head;
+        tail = head; // old head becomes new tail
 
-        while (cur != null){
-            cur.setNext(prev);
-            prev = prev.getNext();
-            cur = cur.getNext();
+        while (cur != null) {
+            Node<E> next = cur.getNext(); 
+            cur.setNext(prev);           
+            prev = cur;                   
+            cur = next;                   
         }
 
-        return;
+        head = prev; 
     }
 
 }
