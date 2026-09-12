@@ -1,4 +1,5 @@
-// test
+import net.datastructures.SinglyLinkedList;
+
 public class SinglyLinkedListTest {
    public static void main(String[] args) {
        SinglyLinkedList<Integer> sll = new SinglyLinkedList<>();
@@ -45,25 +46,32 @@ public class SinglyLinkedListTest {
     System.out.println();
    }
 
-   public static <E> String toString(SinglyLinkedList<E> sll) {
-       StringBuilder sb = new StringBuilder();
-       while (!sll.isEmpty()) {
-           sb.append(sll.first()).append(" ");
-           // requires your implementation's standard traversal mechanism
-       }
-       return sb.toString();
-   }
-   
-   // Removes and returns the last element of the provided list
    public static <E> E removeLast(SinglyLinkedList<E> sll) {
        if (sll.isEmpty()) {
            return null;
        }
-       return sll.removeLast();
+       if (sll.size() == 1) {
+           return sll.removeFirst();
+       }
+
+       int targetSize = sll.size() - 1;
+       for (int i = 0; i < targetSize; i++) {
+           sll.addLast(sll.removeFirst());
+       }
+
+       return sll.removeFirst();
    }
-   
-   // Reverses the provided SinglyLinkedList instance
+
    public static <E> void reverse(SinglyLinkedList<E> sll) {
-       sll.reverse();
+       SinglyLinkedList<E> temp = new SinglyLinkedList<>();
+       
+       while (!sll.isEmpty()) {
+           temp.addFirst(sll.removeFirst());
+       }
+       
+       while (!temp.isEmpty()) {
+           sll.addLast(temp.removeFirst());
+       }
+   }
    }
 }
