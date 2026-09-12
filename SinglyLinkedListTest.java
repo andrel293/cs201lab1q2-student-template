@@ -45,67 +45,60 @@ public class SinglyLinkedListTest {
     System.out.println();
    }
 
-  @Override
-    public String toString() {
-        if (head == null) {
-            return ""; 
-        }
-
-        String str = "[";
-        Node<E> cur = head;
-        while (cur != null) {
-            str += cur.getElement();
-            if (cur.getNext() != null) {
-                str += ", ";
-            }
-            cur = cur.getNext();
-        }
-        str += "]";
-        return str;
-    }
-
-    public E removeLast() {
-        if (head == null) {
-            return null; 
-        }
-
-        E removedElement;
-
-        if (head == tail) {
-            removedElement = head.getElement();
-            head = null;
-            tail = null;
-        } else {
-            Node<E> cur = head;
-            while (cur.getNext() != tail) {
-                cur = cur.getNext();
-            }
-            removedElement = tail.getElement();
-            cur.setNext(null); 
-            tail = cur;
-        }
-
-        size--;
-        return removedElement;
-    }
-
-    public void reverse() {
-        if (head == null) {
-            return; 
-        }
-
-        Node<E> prev = null;
-        Node<E> cur = head;
-        tail = head; // old head becomes new tail
-
-        while (cur != null) {
-            Node<E> next = cur.getNext(); 
-            cur.setNext(prev);           
-            prev = cur;                   
-            cur = next;                   
-        }
-
-        head = prev; 
-    }
+   public String toString() {
+       StringBuilder sb = new StringBuilder();
+       Node<E> current = head;
+   
+       while (current != null) {
+           sb.append(current.getElement());
+           current = current.getNext();
+       }
+   
+       return sb.toString();
+   }
+   
+   public E removeLast() {
+       if (isEmpty()) {
+           return null;
+       }
+   
+       E answer = tail.getElement();
+   
+       if (size == 1) {
+           head = null;
+           tail = null;
+           size = 0;
+           return answer;
+       }
+   
+       Node<E> current = head;
+   
+       while (current.getNext() != tail) {
+           current = current.getNext();
+       }
+   
+       tail = current;
+       tail.setNext(null);
+       size--;
+   
+       return answer;
+   }
+   
+   public void reverse() {
+       Node<E> previous = null;
+       Node<E> current = head;
+   
+       tail = head;
+   
+       while (current != null) {
+           Node<E> next = current.getNext();
+   
+           current.setNext(previous);
+           previous = current;
+           current = next;
+       }
+   
+       head = previous;
+   }
 
 }
