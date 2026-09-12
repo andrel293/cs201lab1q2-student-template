@@ -45,60 +45,25 @@ public class SinglyLinkedListTest {
     System.out.println();
    }
 
-   public String toString() {
+   public static <E> String toString(SinglyLinkedList<E> sll) {
        StringBuilder sb = new StringBuilder();
-       Node<E> current = head;
-   
-       while (current != null) {
-           sb.append(current.getElement());
-           current = current.getNext();
+       while (!sll.isEmpty()) {
+           sb.append(sll.first()).append(" ");
+           // requires your implementation's standard traversal mechanism
        }
-   
        return sb.toString();
    }
    
-   public E removeLast() {
-       if (isEmpty()) {
+   // Removes and returns the last element of the provided list
+   public static <E> E removeLast(SinglyLinkedList<E> sll) {
+       if (sll.isEmpty()) {
            return null;
        }
-   
-       E answer = tail.getElement();
-   
-       if (size == 1) {
-           head = null;
-           tail = null;
-           size = 0;
-           return answer;
-       }
-   
-       Node<E> current = head;
-   
-       while (current.getNext() != tail) {
-           current = current.getNext();
-       }
-   
-       tail = current;
-       tail.setNext(null);
-       size--;
-   
-       return answer;
+       return sll.removeLast();
    }
    
-   public void reverse() {
-       Node<E> previous = null;
-       Node<E> current = head;
-   
-       tail = head;
-   
-       while (current != null) {
-           Node<E> next = current.getNext();
-   
-           current.setNext(previous);
-           previous = current;
-           current = next;
-       }
-   
-       head = previous;
+   // Reverses the provided SinglyLinkedList instance
+   public static <E> void reverse(SinglyLinkedList<E> sll) {
+       sll.reverse();
    }
-
 }
